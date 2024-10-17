@@ -1,0 +1,199 @@
+databaseChangeLog:
+  - changeSet:
+      id: '1'
+      author: Leonardo Andrade
+      changes:
+        - createTable:
+            tableName: pauta
+            columns:
+              - column:
+                  name: id
+                  type: uuid
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(150)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: enabled
+                  type: boolean
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_at
+                  type: timestamp
+                  defaultValueComputed: CURRENT_TIMESTAMP
+                  constraints:
+                    nullable: false
+              - column:
+                  name: updated_at
+                  type: timestamp
+                  constraints:
+                    nullable: true
+
+  - changeSet:
+      id: '2'
+      author: Leonardo Andrade
+      changes:
+        - createTable:
+            tableName: associado
+            columns:
+              - column:
+                  name: id
+                  type: uuid
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: cpf
+                  type: varchar(14)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: pauta_id
+                  type: uuid
+                  constraints:
+                    nullable: false
+              - column:
+                  name: enabled
+                  type: boolean
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_at
+                  type: timestamp
+                  defaultValueComputed: CURRENT_TIMESTAMP
+                  constraints:
+                    nullable: false
+              - column:
+                  name: updated_at
+                  type: timestamp
+                  constraints:
+                    nullable: true
+
+  - changeSet:
+      id: '3'
+      author: Leonardo Andrade
+      changes:
+        - addForeignKeyConstraint:
+            baseTableName: associado
+            baseColumnNames: pauta_id
+            constraintName: fk_associado_pauta_id
+            referencedTableName: pauta
+            referencedColumnNames: id
+
+  - changeSet:
+      id: '4'
+      author: Leonardo Andrade
+      changes:
+        - createTable:
+            tableName: secao
+            columns:
+              - column:
+                  name: id
+                  type: uuid
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: expiration_date
+                  type: timestamp
+                  constraints:
+                    nullable: false
+              - column:
+                  name: pauta_id
+                  type: uuid
+                  constraints:
+                    nullable: false
+              - column:
+                  name: enabled
+                  type: boolean
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_at
+                  type: timestamp
+                  defaultValueComputed: CURRENT_TIMESTAMP
+                  constraints:
+                    nullable: false
+              - column:
+                  name: updated_at
+                  type: timestamp
+                  constraints:
+                    nullable: true
+
+  - changeSet:
+      id: '5'
+      author: Leonardo Andrade
+      changes:
+        - addForeignKeyConstraint:
+            baseTableName: secao
+            baseColumnNames: pauta_id
+            constraintName: fk_secao_pauta_id
+            referencedTableName: pauta
+            referencedColumnNames: id
+
+  - changeSet:
+      id: '6'
+      author: Leonardo Andrade
+      changes:
+        - createTable:
+            tableName: voto
+            columns:
+              - column:
+                  name: id
+                  type: uuid
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: vote_value
+                  type: varchar(10)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: associado_id
+                  type: uuid
+                  constraints:
+                    nullable: false
+              - column:
+                  name: secao_id
+                  type: uuid
+                  constraints:
+                    nullable: false
+              - column:
+                  name: enabled
+                  type: boolean
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_at
+                  type: timestamp
+                  defaultValueComputed: CURRENT_TIMESTAMP
+                  constraints:
+                    nullable: false
+              - column:
+                  name: updated_at
+                  type: timestamp
+                  constraints:
+                    nullable: true
+
+  - changeSet:
+      id: '7'
+      author: Leonardo Andrade
+      changes:
+        - addForeignKeyConstraint:
+            baseTableName: voto
+            baseColumnNames: secao_id
+            constraintName: fk_voto_secao_id
+            referencedTableName: secao
+            referencedColumnNames: id
+        - addForeignKeyConstraint:
+            baseTableName: voto
+            baseColumnNames: associado_id
+            constraintName: fk_voto_associado_id
+            referencedTableName: associado
+            referencedColumnNames: id

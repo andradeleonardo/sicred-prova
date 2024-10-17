@@ -1,0 +1,37 @@
+services:
+  postgres:
+    image: postgres:16
+    networks:
+      - sicred_network
+    container_name: postgres
+    ports:
+      - 5432:5432
+    shm_size: 128mb
+    environment:
+      POSTGRES_USER: sicred
+      POSTGRES_PASSWORD: sicred
+      POSTGRES_DB: sicred
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  pgadmin:
+    image: dpage/pgadmin4:8.9
+    networks:
+      - sicred_network
+    container_name: pgadmin4
+    depends_on:
+      - postgres
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@sicred.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+      - 8081:80
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin
+
+volumes:
+  postgres_data:
+  pgadmin_data:
+
+networks:
+  sicred_network:

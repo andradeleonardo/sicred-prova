@@ -1,0 +1,14 @@
+{
+  "id": "7cf8797e-b597-429a-8b83-c9cb66c29fbe",
+  "valor": "SIM",
+  "secao": {
+    "id": "ba5ef72d-9b34-4aa9-9eca-bfd658eded1e"
+  },
+  "associado": {
+    "id": "2f170560-08f6-422e-8e53-8b68badebbed",
+    "cpf": "32067773569"
+  },
+  "createdAt": "2024-10-02T10:16:26.939",
+  "updatedAt": "2024-10-04T07:03:59.569",
+  "enabled": true
+}

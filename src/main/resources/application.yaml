@@ -1,0 +1,41 @@
+spring:
+  application:
+    output:
+      ansi:
+        enabled: always
+    name: sicred-prova
+  datasource:
+    url: jdbc:postgresql://172.17.0.1:5432/sicred
+    username: sicred
+    password: sicred
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+  liquibase:
+    enabled: true
+    change-log: classpath:db/changelog/db.changelog-master.yaml
+  cloud:
+    openfeign:
+      client:
+        config:
+          default:
+            connectTimeout: 5000
+            readTimeout: 5000
+
+server:
+  port: 8089
+
+springdoc:
+  api-docs:
+    path: /api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    enabled: true
+
+external:
+  userInfo:
+    url: https://user-info.herokuapp.com
+    enabled: false
